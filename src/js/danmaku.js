@@ -1,4 +1,4 @@
-/*! videojs-danmaku - v0.0.1 - 2014-6.12
+/*! videojs-danmaku
  * Copyright (c) 2014 Sunny Li
  * Licensed under the MIT license. */
 (function (videojs, CommentManager, commentLoader) {
@@ -6,7 +6,8 @@
   
   var danmaku = function (options) {
     var overlay = document.createElement('div'),
-      cm = new CommentManager(overlay);
+      cm = new CommentManager(overlay),
+      player = this;
 
     overlay.className = 'vjs-danmaku container';
     this.el().insertBefore(overlay, this.el().firstChild.nextSibling);
@@ -26,6 +27,11 @@
 
     function updateDisplayArea() {
       cm.setBounds();
+      if (cm.def.globalScale === 1) {
+        cm.def.globalScale = screen.width / player.width();
+      } else {
+        cm.def.globalScale = 1;
+      }
     }
     
     this.on('resize', updateDisplayArea);
