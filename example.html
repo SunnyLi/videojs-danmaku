@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Videojs Danmaku Overlay</title>
+    <link href="components/videojs/dist/video-js/video-js.css" rel="stylesheet">
+    <link href="components/CommentCoreLibrary/build/style.css" rel="stylesheet">
+    <script src="components/videojs/dist/video-js/video.dev.js"></script>
+    <script src="components/CommentCoreLibrary/build/CommentCoreLibrary.js"></script>
+    <script src="components/CommentCoreLibrary/demo/libxml.js"></script>
+    <script>
+      videojs.options.flash.swf = "components/videojs/dist/video-js/video-js.swf"
+    </script>
+    <style>
+      .container{
+        pointer-events: none;
+        z-index: 0 !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <video id="player" class="video-js vjs-default-skin vjs-big-play-centered abp">
+      <source src="./flandre.mp4" type="video/mp4">
+    </video>
+    <script src="src/js/danmaku.js"></script>
+    <script>
+      videojs('player', {
+        controls: true,
+        width: 640,
+        height: 400,
+        plugins: {
+          danmaku: {
+            'src': ["components/CommentCoreLibrary/tests/comment.xml"]
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
