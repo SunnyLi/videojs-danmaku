@@ -26,14 +26,14 @@
     });
 
     function updateDisplayArea() {
-      cm.setBounds();
+      setTimeout(function () { cm.setBounds(); }, 100);
       if (player.isFullscreen()) {
         cm.def.scrollScale = screen.width / player.width();
       } else {
         cm.def.scrollScale = 1;
       }
     }
-    
+
     player.on('resize', updateDisplayArea);
     player.on('fullscreenchange', updateDisplayArea);
 
