@@ -10,19 +10,19 @@
       player = this;
 
     overlay.className = 'vjs-danmaku container';
-    this.el().insertBefore(overlay, this.el().firstChild.nextSibling);
+    player.el().insertBefore(overlay, player.el().firstChild.nextSibling);
     cm.init();
 
-    this.on('play', function () {
+    player.on('play', function () {
       cm.startTimer();
     });
 
-    this.on('pause', function () {
+    player.on('pause', function () {
       cm.stopTimer();
     });
 
-    this.on('timeupdate', function (e) {
-      cm.time(e.target.player.currentTime() * 1000);
+    player.on('timeupdate', function (e) {
+      cm.time(player.currentTime() * 1000);
     });
 
     function updateDisplayArea() {
@@ -34,8 +34,8 @@
       }
     }
     
-    this.on('resize', updateDisplayArea);
-    this.on('fullscreenchange', updateDisplayArea);
+    player.on('resize', updateDisplayArea);
+    player.on('fullscreenchange', updateDisplayArea);
 
     commentLoader(options.src, cm);
   };
