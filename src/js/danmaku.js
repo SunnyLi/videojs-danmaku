@@ -28,9 +28,9 @@
     function updateDisplayArea() {
       cm.setBounds();
       if (player.isFullscreen()) {
-        cm.def.globalScale = screen.width / player.width();
+        cm.def.scrollScale = screen.width / player.width();
       } else {
-        cm.def.globalScale = 1;
+        cm.def.scrollScale = 1;
       }
     }
     
