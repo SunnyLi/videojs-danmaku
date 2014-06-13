@@ -27,7 +27,7 @@
 
     function updateDisplayArea() {
       cm.setBounds();
-      if (cm.def.globalScale === 1) {
+      if (player.isFullscreen()) {
         cm.def.globalScale = screen.width / player.width();
       } else {
         cm.def.globalScale = 1;
