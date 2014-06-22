@@ -38,6 +38,42 @@
     player.on('fullscreenchange', updateDisplayArea);
 
     commentLoader(options.src, cm);
+
+
+    /******************************
+     *  Visibility Toggle Button
+     ******************************/
+
+    videojs.DanmakuButton = videojs.Button.extend({
+      init: function (player, options) {
+        videojs.Button.call(this, player, options);
+      }
+    });
+
+    videojs.DanmakuButton.prototype.onClick = function () {
+      var $danmakus = document.getElementsByClassName('vjs-danmaku container')[0];
+      if (!/inactive/.test(this.el().className)) {
+        this.el().className += ' inactive';
+        $danmakus.style.display = "none";
+      } else {
+        this.el().className = this.el().className.replace(/\s?inactive/, '');
+        $danmakus.style.display = "";
+      }
+    };
+
+    function createDanmakuButton() {
+      var props = {
+        className: 'vjs-danmaku-button vjs-control',
+        role: 'button',
+        'aria-live': 'polite',
+        tabIndex: 0
+      };
+      return videojs.Component.prototype.createEl(null, props);
+    }
+
+    player.controlBar.el().appendChild(
+      new videojs.DanmakuButton(this, { 'el': createDanmakuButton() }).el()
+    );
   };
 
   videojs.plugin('danmaku', danmaku);
