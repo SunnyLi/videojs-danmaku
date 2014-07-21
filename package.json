@@ -1,6 +1,6 @@
 {
   "name": "videojs-danmaku",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Sunny Li",
   "description": "Danmaku overlay for videojs",
   "keywords": [
@@ -9,7 +9,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "test": "grunt",
-    "start": "http-server -a localhost -p 8000"
+    "start": "http-server"
   }
 }

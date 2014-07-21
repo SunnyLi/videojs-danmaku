@@ -44,27 +44,119 @@
      *  Visibility Toggle Button
      ******************************/
 
-    videojs.DanmakuButton = videojs.Button.extend({
+    videojs.DanmakuButton = videojs.MenuButton.extend({
       init: function (player, options) {
-        videojs.Button.call(this, player, options);
+        options.title = "Danmaku Settings";
+        videojs.MenuButton.call(this, player, options);
       }
     });
 
+    videojs.DanmakuButton.prototype.createItems = function () {
+      return [
+        new videojs.DanmakuLifetimeLabel(player, {}),
+        new videojs.DanmakuLifetimeSlider(player),
+        new videojs.DanmakuOpacityLabel(player, {}),
+        new videojs.DanmakuOpacitySlider(player)
+      ];
+    };
+
     videojs.DanmakuButton.prototype.onClick = function () {
-      var $danmakus = document.getElementsByClassName('vjs-danmaku container')[0];
-      if (!/inactive/.test(this.el().className)) {
-        this.el().className += ' inactive';
-        $danmakus.style.display = "none";
+      if (!/danmaku-hidden/.test(this.el().className)) {
+        this.el().className += ' danmaku-hidden';
+        overlay.style.display = "none";
       } else {
-        this.el().className = this.el().className.replace(/\s?inactive/, '');
-        $danmakus.style.display = "";
+        this.el().className = this.el().className.replace(/\s?danmaku-hidden/, '');
+        overlay.style.display = "";
       }
     };
 
+    videojs.LazyLabel = videojs.MenuItem.extend();
+    videojs.LazyLabel.prototype.onClick = function () {};
+
+    videojs.DanmakuLifetimeLabel = videojs.LazyLabel.extend({
+      init: function (player, options) {
+        options.label = "lifetime";
+        videojs.LazyLabel.call(this, player, options);
+      }
+    });
+
+    videojs.DanmakuOpacityLabel = videojs.LazyLabel.extend({
+      init: function (player, options) {
+        options.label = "opacity";
+        videojs.LazyLabel.call(this, player, options);
+      }
+    });
+
+    /***************
+     *  Sliders
+     ***************/
+
+    videojs.GenericSlider = videojs.Slider.extend({
+      init: function (player, options) {
+        var self = this;
+        setTimeout(function () {
+          self.update();
+        }, 0);
+        videojs.Slider.call(this, player, options);
+      }
+    });
+    videojs.GenericSlider.prototype.options_ = {
+      children: {
+        'genericSliderLevel': {},
+        'genericSliderHandle': {}
+      },
+      'barName': 'genericSliderLevel',
+      'handleName': 'genericSliderHandle'
+    };
+    videojs.GenericSlider.prototype.createEl = function () {
+      return videojs.Slider.prototype.createEl.call(this, 'div', {
+        className: 'vjs-volume-bar'
+      });
+    };
+    videojs.GenericSlider.prototype.getPercent = function () {
+      return 0.5;
+    };
+    videojs.GenericSliderLevel = videojs.Component.extend();
+    videojs.GenericSliderLevel.prototype.createEl = function () {
+      return videojs.Component.prototype.createEl.call(this, 'div', {
+        className: 'vjs-volume-level'
+      });
+    };
+    videojs.GenericSliderHandle = videojs.SliderHandle.extend();
+    videojs.GenericSliderHandle.prototype.createEl = function () {
+      return videojs.SliderHandle.prototype.createEl.call(this, 'div', {
+        className: 'vjs-volume-handle'
+      });
+    };
+
+    videojs.DanmakuLifetimeSlider = videojs.GenericSlider.extend();
+    videojs.DanmakuLifetimeSlider.prototype.onMouseMove = function (event) {
+      var scale;
+      if ((scale = this.calculateDistance(event)) > 0.1) {
+        cm.def.globalScale = scale * 2;
+      }
+    };
+    videojs.DanmakuLifetimeSlider.prototype.getPercent = function () {
+      return cm.def.globalScale / 2;
+    };
+
+    videojs.DanmakuOpacitySlider = videojs.GenericSlider.extend();
+    videojs.DanmakuOpacitySlider.prototype.onMouseMove = function (event) {
+      cm.def.opacity = this.calculateDistance(event);
+    };
+    videojs.DanmakuOpacitySlider.prototype.getPercent = function () {
+      return cm.def.opacity;
+    };
+
+    /********************
+     *  Init Components
+     ********************/
+
     function createDanmakuButton() {
       var props = {
-        className: 'vjs-danmaku-button vjs-control',
+        className: 'vjs-danmaku-button vjs-menu-button vjs-control',
         role: 'button',
+        'aria-label': 'danmaku settings',
         'aria-live': 'polite',
         tabIndex: 0
       };
