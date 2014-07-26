@@ -108,6 +108,7 @@
       'barName': 'genericSliderLevel',
       'handleName': 'genericSliderHandle'
     };
+    videojs.GenericSlider.prototype.playerEvent = 'danmakuSettingsChange';
     videojs.GenericSlider.prototype.createEl = function () {
       return videojs.Slider.prototype.createEl.call(this, 'div', {
         className: 'vjs-volume-bar'
@@ -135,6 +136,7 @@
       if ((scale = this.calculateDistance(event)) > 0.1) {
         cm.def.globalScale = scale * 2;
       }
+      this.trigger('danmakuSettingsChange');
     };
     videojs.DanmakuLifetimeSlider.prototype.getPercent = function () {
       return cm.def.globalScale / 2;
@@ -143,6 +145,7 @@
     videojs.DanmakuOpacitySlider = videojs.GenericSlider.extend();
     videojs.DanmakuOpacitySlider.prototype.onMouseMove = function (event) {
       cm.def.opacity = this.calculateDistance(event);
+      this.trigger('danmakuSettingsChange');
     };
     videojs.DanmakuOpacitySlider.prototype.getPercent = function () {
       return cm.def.opacity;
