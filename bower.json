@@ -11,7 +11,8 @@
   ],
   "license": "MIT",
   "main": [
-    "src/danmaku.js"
+    "src/danmaku.js",
+    "src/danmaku.css"
   ]
   "dependencies": {
     "comment-core-library": "0.9.0"

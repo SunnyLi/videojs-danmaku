@@ -4,59 +4,13 @@
     <title>Videojs Danmaku Overlay</title>
     <link href="components/videojs/dist/video-js/video-js.css" rel="stylesheet">
     <link href="components/comment-core-library/build/style.css" rel="stylesheet">
+    <link href="src/danmaku.css" rel="stylesheet">
     <script src="components/videojs/dist/video-js/video.dev.js"></script>
     <script src="components/comment-core-library/build/CommentCoreLibrary.js"></script>
     <script src="components/comment-core-library/demo/libxml.js"></script>
-    <script src="components/videojs-youtube/dist/vjs.youtube.js"></script>
     <script>
       videojs.options.flash.swf = "components/videojs/dist/video-js/video-js.swf"
     </script>
-    <style>
-      .container{
-        pointer-events: none;
-        z-index: 0 !important;
-      }
-
-      .vjs-default-skin .vjs-danmaku-button{
-        cursor: pointer;
-        float: right;
-        width: 2em;
-      }
-
-      .vjs-default-skin .vjs-danmaku-button:before{
-        content: '\e00c';
-      }
-
-      .vjs-default-skin .vjs-danmaku-button.danmaku-hidden{
-        color: grey;
-      }
-
-      .vjs-default-skin .vjs-danmaku-button .vjs-menu{
-        left: -1em;
-      }
-
-      .vjs-default-skin .vjs-danmaku-button .vjs-menu .vjs-menu-content{
-        cursor: default;
-        height: 11.5em;
-      }
-
-      .vjs-default-skin .vjs-danmaku-button .vjs-menu .vjs-menu-title{
-        font-size: 0.8em;
-        margin-bottom: 1em;
-      }
-
-      .vjs-default-skin .vjs-danmaku-button .vjs-menu .vjs-menu-label{
-        background-color: transparent;
-        box-shadow: none;
-        color: inherit;
-        cursor: default;
-        padding: 0;
-      }
-
-      .vjs-default-skin .vjs-danmaku-button .vjs-menu .vjs-slider{
-        margin-bottom: 1em;
-      }
-    </style>
   </head>
 
   <body>

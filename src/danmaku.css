@@ -1,0 +1,44 @@
+.container{
+  pointer-events: none;
+  z-index: 0 !important;
+}
+
+.vjs-default-skin .vjs-danmaku-button{
+  cursor: pointer;
+  float: right;
+  width: 2em;
+}
+
+.vjs-default-skin .vjs-danmaku-button:before{
+  content: '\e00c';
+}
+
+.vjs-default-skin .vjs-danmaku-button.danmaku-hidden{
+  color: grey;
+}
+
+.vjs-default-skin .vjs-danmaku-button .vjs-menu{
+  left: -1em;
+}
+
+.vjs-default-skin .vjs-danmaku-button .vjs-menu .vjs-menu-content{
+  cursor: default;
+  height: 11.5em;
+}
+
+.vjs-default-skin .vjs-danmaku-button .vjs-menu .vjs-menu-title{
+  font-size: 0.8em;
+  margin-bottom: 1em;
+}
+
+.vjs-default-skin .vjs-danmaku-button .vjs-menu .vjs-menu-label{
+  background-color: transparent;
+  box-shadow: none;
+  color: inherit;
+  cursor: default;
+  padding: 0;
+}
+
+.vjs-default-skin .vjs-danmaku-button .vjs-menu .vjs-slider{
+  margin-bottom: 1em;
+}
