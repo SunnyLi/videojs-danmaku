@@ -1,6 +1,6 @@
 {
   "name": "videojs-danmaku",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "authors": [
     "Sunny Li"
   ],
@@ -11,9 +11,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "CommentCoreLibrary": "git://github.com/jabbany/CommentCoreLibrary.git#0.9.0"
+    "comment-core-library": "0.9.0"
   },
   "devDependencies": {
-    "videojs": "~4.6.2"
+    "videojs": "~4.7.3"
   }
 }

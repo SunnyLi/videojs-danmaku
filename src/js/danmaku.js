@@ -72,13 +72,13 @@
 
     videojs.LazyLabel = videojs.MenuItem.extend();
     videojs.LazyLabel.prototype.onClick = function () {};
-    videojs.LazyLabel.prototype.createEl = function(){
+    videojs.LazyLabel.prototype.createEl = function () {
       return videojs.MenuItem.prototype.createEl.call(this, 'li', {
         className: 'vjs-menu-label',
         role: 'tooltip',
         'aria-label': this.options_.label
-      })
-    }
+      });
+    };
 
     videojs.DanmakuLifetimeLabel = videojs.LazyLabel.extend({
       init: function (player, options) {

@@ -3,10 +3,11 @@
   <head>
     <title>Videojs Danmaku Overlay</title>
     <link href="components/videojs/dist/video-js/video-js.css" rel="stylesheet">
-    <link href="components/CommentCoreLibrary/build/style.css" rel="stylesheet">
+    <link href="components/comment-core-library/build/style.css" rel="stylesheet">
     <script src="components/videojs/dist/video-js/video.dev.js"></script>
-    <script src="components/CommentCoreLibrary/build/CommentCoreLibrary.js"></script>
-    <script src="components/CommentCoreLibrary/demo/libxml.js"></script>
+    <script src="components/comment-core-library/build/CommentCoreLibrary.js"></script>
+    <script src="components/comment-core-library/demo/libxml.js"></script>
+    <script src="components/videojs-youtube/dist/vjs.youtube.js"></script>
     <script>
       videojs.options.flash.swf = "components/videojs/dist/video-js/video-js.swf"
     </script>
@@ -71,7 +72,7 @@
         height: 400,
         plugins: {
           danmaku: {
-            'src': ["components/CommentCoreLibrary/tests/comment.xml"]
+            'src': ["components/comment-core-library/tests/comment.xml"]
           }
         }
       });
