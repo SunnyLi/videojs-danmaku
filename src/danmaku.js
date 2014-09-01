@@ -238,7 +238,6 @@
           cmt.mode = parseInt(select_mode.value, 10);
           cmt.size = 25;
           cmt.text = text_input.value;
-          cmt.color = "#FFFFFF";
 
           var dmpost = new XMLHttpRequest(),
             cmtSend = JSON.stringify(cmt);
@@ -249,6 +248,7 @@
             if (dmpost.readyState === XMLHttpRequest.DONE) {
 
               if (dmpost.status === 200 || dmpost.status === 201) {
+                cmt.stime *= 1000;
                 cmt.border = true;
                 cm.timeline.binsert(cmt, function (a, b) {
                   if (a.stime < b.stime) {
