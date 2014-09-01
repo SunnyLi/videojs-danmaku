@@ -42,3 +42,19 @@
 .vjs-default-skin .vjs-danmaku-button .vjs-menu .vjs-slider{
   margin-bottom: 1em;
 }
+
+.vjs-default-skin .vjs-danmaku-bar{
+  margin-top: 0.25em;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.vjs-default-skin .vjs-danmaku-bar form{
+  margin: auto auto;
+  pointer-events: auto;
+  width: 32em;
+}
+
+.vjs-default-skin .vjs-danmaku-bar form span{
+  font-size: 1.2em;
+}

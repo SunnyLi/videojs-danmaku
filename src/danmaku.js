@@ -176,6 +176,103 @@
     player.controlBar.el().appendChild(
       new videojs.DanmakuButton(this, { 'el': createDanmakuButton() }).el()
     );
+
+
+    /********************
+     *  Comment Bar
+     ********************/
+
+    if (options.cid) {
+      var bar = document.createElement('div'),
+        form = document.createElement('form'),
+        span = document.createElement('span'),
+        select = document.createElement('select'),
+        option = document.createElement('option'),
+        input = document.createElement('input'),
+        span_mode = span.cloneNode(),
+        select_mode = select.cloneNode(),
+        text_input = input.cloneNode(),
+        submit_button = input.cloneNode(),
+        option_mode_default = option.cloneNode(),
+        option_mode_top = option.cloneNode(),
+        option_mode_bottom = option.cloneNode();
+
+      bar.className = "vjs-danmaku-bar";
+
+      select_mode.className = "mode";
+      option_mode_default.appendChild(document.createTextNode("<"));
+      option_mode_default.setAttribute("value", 1);
+      option_mode_default.setAttribute("selected", "");
+      select_mode.appendChild(option_mode_default);
+      option_mode_top.appendChild(document.createTextNode("^"));
+      option_mode_top.setAttribute("value", 5);
+      select_mode.appendChild(option_mode_top);
+      option_mode_bottom.appendChild(document.createTextNode("v"));
+      option_mode_bottom.setAttribute("value", 4);
+      select_mode.appendChild(option_mode_bottom);
+
+      span_mode.appendChild(document.createTextNode("Mode: "));
+      span_mode.appendChild(select_mode);
+      form.appendChild(span_mode);
+
+      text_input.setAttribute("type", "text");
+      text_input.setAttribute("placeholder", " leave a comment");
+      text_input.setAttribute("autofocus", "");
+      form.appendChild(text_input);
+
+      submit_button.setAttribute("type", "submit");
+      submit_button.setAttribute("value", "send");
+      form.appendChild(submit_button);
+
+      form.className = "danmaku";
+      bar.appendChild(form);
+      player.controlBar.el().appendChild(bar);
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if (text_input.value !== '') {
+          var cmt = {};
+          cmt.cid = options.cid;
+          cmt.stime = player.currentTime();
+          cmt.mode = parseInt(select_mode.value, 10);
+          cmt.size = 25;
+          cmt.text = text_input.value;
+          cmt.color = "#FFFFFF";
+
+          var dmpost = new XMLHttpRequest(),
+            cmtSend = JSON.stringify(cmt);
+          dmpost.open("POST", options.postURL || '/danmaku', true);
+          dmpost.setRequestHeader("Content-type", "application/json");
+
+          dmpost.onreadystatechange = function () {
+            if (dmpost.readyState === XMLHttpRequest.DONE) {
+
+              if (dmpost.status === 200 || dmpost.status === 201) {
+                cmt.border = true;
+                cm.timeline.binsert(cmt, function (a, b) {
+                  if (a.stime < b.stime) {
+                    return -1;
+                  } else if (a.stime === b.stime) {
+                    return 0;
+                  } else { return 1; }
+                });
+
+                text_input.setAttribute("placeholder", " comment sent");
+
+              } else {
+                text_input.setAttribute("placeholder", " comment failed");
+              }
+
+            }
+          };
+
+          dmpost.send(cmtSend);
+          text_input.value = '';
+        }
+        return false;
+      });
+    }
   };
 
   videojs.plugin('danmaku', danmaku);
