@@ -17,7 +17,8 @@
   color: grey;
 }
 
-.vjs-default-skin .vjs-danmaku-button .vjs-menu{
+.vjs-default-skin .vjs-danmaku-button:hover .vjs-menu{
+  display: block;
   left: -1em;
 }
 
